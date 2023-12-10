@@ -7,7 +7,6 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-RUN dotnet nuget add source http://87.249.53.45:5555/v3/index.json
 COPY ["PmEngine.WebApiExample/PmEngine.WebApiExample.csproj", "PmEngine.WebApiExample/"]
 RUN dotnet restore "PmEngine.WebApiExample/PmEngine.WebApiExample.csproj"
 COPY . .
