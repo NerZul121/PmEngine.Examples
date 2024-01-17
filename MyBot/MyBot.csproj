@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="PmEngine.Core" Version="1.1.115.119" />
+    <PackageReference Include="PmEngine.Core" Version="1.1.115.151" />
   </ItemGroup>
 
 </Project>

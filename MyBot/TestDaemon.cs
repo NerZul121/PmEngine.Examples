@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using PmEngine.Core;
 using PmEngine.Core.Daemons;
 
 namespace MyBot
@@ -7,6 +8,7 @@ namespace MyBot
     {
         public TestDaemon(IServiceProvider services, ILogger logger) : base(services, logger)
         {
+            DelayInSec = 10;
         }
 
         /// <summary>

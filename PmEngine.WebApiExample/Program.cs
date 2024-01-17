@@ -3,7 +3,6 @@ using Newtonsoft.Json;
 using PmEngine.Core.Daemons;
 using PmEngine.Core.Extensions;
 using PmEngine.Examples;
-using PmEngine.Examples.Actions;
 using PmEngine.Telegram;
 using PmEngine.Vk;
 using Telegram.Bot;
@@ -32,9 +31,11 @@ builder.Services.AddVkModule();
 builder.Services.AddPMEngine((e) =>
 {
     // Движок будет использовать HelloWorldAction как базовое действие пользователя при инициализации
-    e.Properties.InitializationAction = typeof(HelloWorldAction);
+    e.Properties.InitializationActionName = "MyBot.Actions.HelloWorldAction";
     // Движок будет работать БД в памяти
     e.Properties.DataProvider = PmEngine.Core.Enums.DataProvider.InMemory;
+    // Помечаем, что используем папку с либами
+    e.Properties.UseLibStorage = true;
 });
 
 //Добавляем для теста демона в качестве мягкой ссылки. Он будет работать только тогда, когда либа будет находиться в папке, откуда запускается бот.

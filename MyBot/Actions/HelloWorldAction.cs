@@ -1,7 +1,7 @@
 ﻿using PmEngine.Core.BaseMarkups;
 using PmEngine.Core.Interfaces;
 
-namespace PmEngine.Examples.Actions
+namespace MyBot.Actions
 {
     /// <summary>
     /// Пример простого действия пользователя.
