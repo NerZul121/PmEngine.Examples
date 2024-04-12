@@ -1,4 +1,5 @@
-﻿using PmEngine.Core.BaseMarkups;
+﻿using PmEngine.Core;
+using PmEngine.Core.BaseMarkups;
 using PmEngine.Core.Interfaces;
 
 namespace MyBot.Actions
@@ -8,7 +9,7 @@ namespace MyBot.Actions
     /// </summary>
     public class HelloWorldAction : IAction
     {
-        public async Task<INextActionsMarkup?> DoAction(IActionWrapper currentAction, IUserSession user, IActionArguments arguments)
+        public async Task<INextActionsMarkup?> DoAction(ActionWrapper currentAction, IUserSession user)
         {
             // Добавляем текст для пользователя
             user.AddToOutput($"Привет, {user.CachedData.Id}!");
