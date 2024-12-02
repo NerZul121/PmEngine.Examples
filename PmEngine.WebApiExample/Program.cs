@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.HttpOverrides;
-using Newtonsoft.Json;
+using MyBot.Actions;
 using PmEngine.Core.Daemons;
 using PmEngine.Core.Extensions;
 using PmEngine.Examples;
@@ -9,6 +9,7 @@ using Telegram.Bot;
 
 var builder = WebApplication.CreateBuilder(args);
 var envBotToken = Environment.GetEnvironmentVariable("BOT_TOKEN") ?? "";
+Environment.SetEnvironmentVariable("HOST_URL", "https://56f1-185-197-33-14.ngrok-free.app");
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {
@@ -31,11 +32,9 @@ builder.Services.AddVkModule();
 builder.Services.AddPMEngine((e) =>
 {
     // Движок будет использовать HelloWorldAction как базовое действие пользователя при инициализации
-    e.Properties.InitializationActionName = "MyBot.Actions.HelloWorldAction";
+    e.Properties.InitializationAction = typeof(HelloWorldAction);
     // Движок будет работать БД в памяти
     e.Properties.DataProvider = PmEngine.Core.Enums.DataProvider.InMemory;
-    // Помечаем, что используем папку с либами
-    e.Properties.UseLibStorage = true;
 });
 
 //Добавляем для теста демона в качестве мягкой ссылки. Он будет работать только тогда, когда либа будет находиться в папке, откуда запускается бот.
@@ -47,10 +46,7 @@ builder.Services.AddCors();
 builder.Services.AddHttpClient("tgwebhook").AddTypedClient<ITelegramBotClient>(httpClient => new TelegramBotClient(envBotToken, httpClient));
 
 // Включаем контроллеры с NewtonJson
-builder.Services.AddControllers().AddNewtonsoftJson(opt =>
-{
-    opt.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-});
+builder.Services.AddControllers();
 
 var app = builder.Build();
 
@@ -63,15 +59,7 @@ app.UseForwardedHeaders();
 app.UseRouting();
 app.UseCors(cr => cr.AllowAnyOrigin());
 
-app.UseStaticFiles();
-
-// Включаем контроллер для веб-хука телеги
-app.UseEndpoints(ep =>
-{
-    ep.MapControllerRoute(name: "tgwebhook",
-        pattern: $"TGBot/{envBotToken}",
-        new { controller = "TGBot", action = "Post" });
-    ep.MapControllers();
-});
+// Устанавливаем стандартную реализацию веб-хука.
+await app.SetDefaultTgWebhook();
 
 app.Run();
