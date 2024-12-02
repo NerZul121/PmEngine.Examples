@@ -8,7 +8,7 @@ using Telegram.Bot;
 
 var builder = WebApplication.CreateBuilder(args);
 var envBotToken = Environment.GetEnvironmentVariable("BOT_TOKEN") ?? "";
-Environment.SetEnvironmentVariable("HOST_URL", "https://56f1-185-197-33-14.ngrok-free.app");
+//Environment.SetEnvironmentVariable("HOST_URL", "https://c678-185-197-33-14.ngrok-free.app");
 
 builder.Services.Configure<ForwardedHeadersOptions>(options =>
 {

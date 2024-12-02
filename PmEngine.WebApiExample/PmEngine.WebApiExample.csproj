@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.11" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-    <PackageReference Include="PmEngine.Telegram" Version="1.8.1202.1557" />
+    <PackageReference Include="PmEngine.Telegram" Version="1.8.1202.1804" />
     <PackageReference Include="PmEngine.Vk" Version="1.8.1105.2033" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="7.1.0" />
   </ItemGroup>
