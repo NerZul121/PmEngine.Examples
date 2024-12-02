@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.HttpOverrides;
 using MyBot.Actions;
-using PmEngine.Core.Daemons;
 using PmEngine.Core.Extensions;
 using PmEngine.Examples;
 using PmEngine.Telegram;
@@ -36,9 +35,6 @@ builder.Services.AddPMEngine((e) =>
     // Движок будет работать БД в памяти
     e.Properties.DataProvider = PmEngine.Core.Enums.DataProvider.InMemory;
 });
-
-//Добавляем для теста демона в качестве мягкой ссылки. Он будет работать только тогда, когда либа будет находиться в папке, откуда запускается бот.
-DaemonManager.DaemonsToLoad.Add("MyBot.TestDaemon");
 
 // Включаем корсы
 builder.Services.AddCors();
