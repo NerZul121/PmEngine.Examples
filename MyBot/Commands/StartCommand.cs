@@ -1,4 +1,5 @@
-﻿using PmEngine.Core;
+﻿using MyBot.Actions;
+using PmEngine.Core;
 using PmEngine.Core.Interfaces;
 
 namespace PmEngine.WebApiExample.Commands
@@ -32,7 +33,7 @@ namespace PmEngine.WebApiExample.Commands
         {
             // Если сессия пользователя была создана давно, то выполняем helloWorldAction
             if ((DateTime.Now - user.SessionCreateTime).TotalSeconds > 5)
-                await user.ActionProcess(new ActionWrapper("", "MyBot.Actions.HelloWorldAction"));
+                await user.ActionProcess(new ActionWrapper<HelloWorldAction>("start"));
 
             return true;
         }
